@@ -32,13 +32,10 @@ para mas detalles consultar el [_datasheet_](./APC220_Datasheet.pdf) que hay en 
 https://wiki.dfrobot.com/APC220_Radio_Data_Module_SKU_TEL0005_
 
 
-Para grabar nuevos aprametros en el modulo, selecionar desde la interfaz grafica y pulsar el boton "grabar configuracion"
+Para grabar nuevos parametros en el modulo, selecionar desde la interfaz grafica y pulsar el boton "grabar configuracion"
 
 Comprobar que dicha configuracion ha quedado establecida mediant el boton "leer configuracion"
-
-s dupont.
-4. Volver a conectar Arduino al ordenador apra que se produzca la grabación de la configuración o para leer la que contiene   
-   
-#### Muestra de la interfac grafica de confiduracion
+ 
+#### Muestra de la interfaz grafica de configuracion
 ![](./imagenes/configuradorAPC220_inopya.png)
 
