@@ -1,3 +1,27 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
+
+#       _\|/_   A ver..., ¿que tenemos por aqui?
+#       (O-O)        
+# ---oOO-(_)-OOo---------------------------------
+ 
+ 
+##########################################################
+# ****************************************************** #
+# *            DOMOTICA PARA PRINCIPIANTES             * #
+# *      TKinter GUI para configuracion de APC220      * #
+# *                                                    * #
+# *          Autor:  Eulogio López Cayuela             * #
+# *                                                    * #
+# *     APC220 TK GUI  v1.0   Fecha: 13/02/2020        * #
+# ****************************************************** #
+##########################################################
+
+
+#--------------------------------------------------------
+# IMPORTACION DE BIBLIOTECAS
+#--------------------------------------------------------
 
 # TIEMPOS, FECHAS
 import time
@@ -19,7 +43,7 @@ import numpy as np
 import math
 
 
-#ENTORNO GRAFICO TKinter (para generar los cuadros de dialogo)   ¡¡ SIN USO !!
+#ENTORNO GRAFICO TKinter (para generar los cuadros de dialogo)   Â¡Â¡ SIN USO !!
 try:  
     from tkinter import *
     import tkinter.filedialog as tkFileDialog #dialogBox
@@ -187,8 +211,9 @@ def enviar_a_Arduino(orden):
     print ("datos enviados")
     return None   # notificamos un problema 
 
-#-----------------------------------------------------------------------------------------
-#-----------------------------------------------------------------------------------------  
+# mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+# FUNCIONES FECHA / HORA
+# mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
      
 def epochDate(epoch):
     '''
@@ -198,6 +223,10 @@ def epochDate(epoch):
     fechaHora = time.strftime("%Y-%m-%d , %H:%M:%S", time.localtime(epoch))
     return fechaHora
 
+
+# mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+# FUNCIONES EVENTO TKinter
+# mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
 
 
 def select_flag(flag): 
@@ -219,9 +248,7 @@ def select_flag(flag):
         if (respuesta != None):
             print(respuesta)
             mensaje = "READ:  "+ respuesta
-            config_label.configure(text=mensaje)
-
-        
+            config_label.configure(text=mensaje)     
     
 
 def mouse_click(event):
@@ -253,7 +280,7 @@ def update_info():
 
 
 #----------------------------------------------------------------------------------------------------
-#  FIN DEL BLOQUE DE DEFINICIÒN DE FUNCIONES
+#  FIN DEL BLOQUE DE DEFINICION DE FUNCIONES
 #----------------------------------------------------------------------------------------------------
 
 
@@ -300,11 +327,11 @@ if (puertoDetectado != ''):
 
 else:
     print (" == GRABADOR APC220 NO PRESENTE == ")
-    print ("    conecte un PLC compatible antes de 60 segundos\n")
+    print ("    conecte un PLC compatible antes de 120 segundos\n")
 
     tiempoInicio = time.time()
     ActualTime = time.time()
-    while (ActualTime - tiempoInicio < 60): 
+    while (ActualTime - tiempoInicio < 120): 
         puertoDetectado = detectarPuertoArduino() #detactamos automaticamente el puerto
         ActualTime = time.time()
         if (puertoDetectado != ''):
@@ -339,8 +366,6 @@ E, es el control de paridad de la informacion emitida por RF
 0 (sin control de paridad), 1 (paridad par), 2 (paridad impar)
 - en el ejemplo sin control de paridad
 
-WR 415372 3 9 3 0
-RF
 
 '''
 
@@ -394,7 +419,7 @@ if puertoDetectado:
     bitrateRF = IntVar()
     for text, value in [(' 2400 bps  ', 1), (' 4800 bps  ', 2), (' 9600 bps  ', 3), ('19200 bps  ', 4)]:
         Radiobutton(panel_bitrateRF, text=text, value=value, variable=bitrateRF).pack(anchor=W)
-        #Radiobutton(root, text=text, value=value, variable=var, indicatoron=0).pack(anchor=W, fill=X, ipadx=18)
+        #Radiobutton(root, text=text, value=value, variable=bitrateRF, indicatoron=0).pack(anchor=W, fill=X, ipadx=18)
     bitrateRF.set(3)
 
 
@@ -402,7 +427,7 @@ if puertoDetectado:
     potenciaRF = IntVar()
     for text, value in [('0      ',0),('1      ',1),('2      ',2),('3      ',3),('4      ',4),('5      ',5),('6      ',6),('7      ',7),('8      ',8),('9      ',9),]:
         Radiobutton(panel_potenciaRF, text=text, value=value, variable=potenciaRF).pack(anchor=CENTER)
-        #Radiobutton(root, text=text, value=value, variable=var, indicatoron=0).pack(anchor=W, fill=X, ipadx=18)
+        #Radiobutton(root, text=text, value=value, variable=potenciaRF, indicatoron=0).pack(anchor=W, fill=X, ipadx=18)
     potenciaRF.set(9)
     
     
@@ -410,7 +435,7 @@ if puertoDetectado:
     bitrateSerial = IntVar()
     for text, value in [('  1200 bps  ', 0),('  2400 bps  ', 1),('  4800 bps  ', 2),('  9600 bps  ', 3),('19200 bps  ', 4),('38400 bps  ', 5),('57600 bps  ', 6),]:
         Radiobutton(panel_bitrateSerial, text=text, value=value, variable=bitrateSerial).pack(anchor=E)
-        #Radiobutton(root, text=text, value=value, variable=var, indicatoron=0).pack(anchor=W, fill=X, ipadx=18)
+        #Radiobutton(root, text=text, value=value, variable=bitrateSerial, indicatoron=0).pack(anchor=W, fill=X, ipadx=18)
     bitrateSerial.set(3)
 
 
@@ -418,7 +443,7 @@ if puertoDetectado:
     paridad = IntVar()
     for text, value in [('Sin Paridad', 0), ('Paridad PAR', 1),('Paridad IMPAR', 2),]:
         Radiobutton(panel_paridad, text=text, value=value, variable=paridad).pack(anchor=W)
-        #Radiobutton(root, text=text, value=value, variable=var, indicatoron=0).pack(anchor=W, fill=X, ipadx=18)
+        #Radiobutton(root, text=text, value=value, variable=paridad, indicatoron=0).pack(anchor=W, fill=X, ipadx=18)
     paridad.set(0)
 
     
@@ -457,12 +482,11 @@ if puertoDetectado:
     panel_potenciaRF.pack(side="left",anchor=N)
     panel_bitrateSerial.pack(side="left",anchor=N)
     panel_paridad.pack(side="left",anchor=N)
-    #screen_medio.pack(fill=X)  #aqui la seccion de parametros con radio boton
+
     panel_MHz.pack(fill=X)
-    screen_info.pack(fill=X)#aqui va componiendo la linea que se va a enviar a modo de ejemplo
-    screen_botones.pack()  #aqui los dos botones, grabar y leer configuracion
+    screen_info.pack(fill=X)
+    screen_botones.pack()
     screen_lectura.pack()
-    #screen_abajo.pack(side="bottom")#(fill=X)
     
     root.mainloop()
 
