@@ -118,9 +118,8 @@ def consultar_Arduino(PAUSA = 0.5):
         #si llegamos aqui es que se ha perdido la conexion con Arduino  :(
         print ("\n_______________________________________________")
         print ("\n == CONEXION PERDIDA == ")
-        print ("\n Cierre el programa y reconecte arduino ")
-        while True:
-            pass
+        print ("\n Cierre el programa, reconecte arduino y ejecute de nuevo \n\n\n\n")
+        root.destroy()
 
     return None 
 
@@ -154,9 +153,9 @@ def enviar_a_Arduino(orden):
         #si llegamos aqui es que se ha perdido la conexion con Arduino  :(
         print ("\n_______________________________________________")
         print ("\n == CONEXION PERDIDA == ")
-        print ("\n Cierre el programa y reconecte arduino ")
-        while True:
-            pass
+        print ("\n Cierre el programa, reconecte arduino y ejecute de nuevo \n\n\n\n")
+        root.destroy()
+
     return None   # notificamos un problema 
 
 
