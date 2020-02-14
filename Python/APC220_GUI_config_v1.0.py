@@ -24,40 +24,22 @@
 #--------------------------------------------------------
 
 # TIEMPOS, FECHAS
-import time
-from time import sleep      #pausas...
-import datetime
-
-#INTERACTUAR CON EL SISTEMA OPERATIVO 
-import sys              #Conocer el tipo de sistema operativo
 import time             #manejo de funciones de tiempo (fechas, horas, pausas...)
-import os               #manejo de funciones del sistema operativo 
-from os import walk     #funciones para movernos por directorios
+from time import sleep  #pausas...
+##import datetime
 
 #PUERTO SERIE
 import serial
 
 
-# FUNCIONES MATEMATICAS AVANZADAS
-import numpy as np
-import math
-
-
-#ENTORNO GRAFICO TKinter 
+#ENTORNO GRAFICO TKinter
 try:  
     from tkinter import *
-    import tkinter.filedialog as tkFileDialog #dialogBox
-    PyVersion = 3
 
 except ImportError:  
     from Tkinter import *
-    import tkFileDialog as tkFileDialog #dialogBox
-    PyVersion = 2
 
 
-#GESTION DE IMAGENES PARA TK (Sin Uso)
-from PIL import Image
-from PIL import ImageTk
 
 
 # mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
@@ -117,8 +99,7 @@ def consultar_Arduino(PAUSA = 0.5):
         arduinoSerialPort.flushOutput()#abortar comunicaciones salientes que puedan estar a medias
 
     except:
-        print ("---------------------------")
-        print ("error borrando datos del puerto Serie de Arduino")
+        print ("\nError borrando datos del puerto Serie de Arduino")
  
     try:
         time.sleep(PAUSA)
@@ -127,11 +108,8 @@ def consultar_Arduino(PAUSA = 0.5):
             #leer una cadena desde el el puerto serie y 'despiojarla'
             linea_leida_de_Arduino = arduinoSerialPort.readline().strip()
             linea_leida_de_Arduino = linea_leida_de_Arduino.decode("utf-8")
-            listaObtenidaDelinea = []
-            #print(linea_leida_de_Arduino,"inside") ##DEBUG
             try:
                 listaObtenidaDelinea = linea_leida_de_Arduino.split(" ")
-                #print(listaObtenidaDelinea, len(listaObtenidaDelinea),"list")
                 if (len(listaObtenidaDelinea) == 6):
                     return  linea_leida_de_Arduino
                 return None
@@ -142,24 +120,11 @@ def consultar_Arduino(PAUSA = 0.5):
         print ("\n_______________________________________________")
         if FLAG_buscandoConexion == False:      #primera vez que llegamos aqui
             print ("\n == CONEXION PERDIDA == ")
-            FLAG_buscandoConexion = True        #para no repetir el texto mientras se reestablece la conexion
+            print ("\n Cierre el programa y reconecte arduino ")
+            while True:
+                pass
 
-        tiempoInicio = time.time()
-        ActualTime = time.time()
-        print ("    Reconectando...")
-        while (ActualTime - tiempoInicio < 10): #Control del tiempo entre consultas de ARDUINO  :)
-            puertoDetectado = detectarPuertoArduino() #detactamos automaticamente el puerto
-            ActualTime = time.time()
-            if (puertoDetectado != ''):
-                arduinoSerialPort = serial.Serial(puertoDetectado, VELOCIDAD_PUERTO_SERIE) #usamos el puerto detectado
-                print ("\n")
-                FLAG_buscandoConexion = False
-                print (" ** COMUNICACION REESTABLECIDA en "  + puertoDetectado + " ** \n")
-                print (epochDate(time.time()))
-                print ("_______________________________________________\n\n")
-                break
-
-    return None   # notificamos un problema de lectura de datos para que se intente tomar otra muestra lo antes posible
+    return None 
 
 #-----------------------------------------------------------------------------------------
 #-----------------------------------------------------------------------------------------  
@@ -187,40 +152,15 @@ def enviar_a_Arduino(orden):
         arduinoSerialPort.write(orden_envio)
         return True
         
-    except Exception as e:
+    except:
         #si llegamos aqui es que se ha perdido la conexion con Arduino  :(
-        print (e,"\n_______________________________________________")
+        print ("\n_______________________________________________")
         if FLAG_buscandoConexion == False:      #primera vez que llegamos aqui
             print ("\n == CONEXION PERDIDA == ")
-            FLAG_buscandoConexion = True        #para no repetir el texto mientras se reestablece la conexion
-
-        tiempoInicio = time.time()
-        ActualTime = time.time()
-        print ("    Reconectando...")
-        while (ActualTime - tiempoInicio < 10): #Control del tiempo entre consultas de ARDUINO  :)
-            puertoDetectado = detectarPuertoArduino() #detactamos automaticamente el puerto
-            ActualTime = time.time()
-            if (puertoDetectado != ''):
-                arduinoSerialPort = serial.Serial(puertoDetectado, VELOCIDAD_PUERTO_SERIE) #usamos el puerto detectado
-                print ("\n")
-                FLAG_buscandoConexion = False
-                print (" ** COMUNICACION REESTABLECIDA en "  + puertoDetectado + " ** \n")
-                print (epochDate(time.time()))
-                print ("_______________________________________________\n\n")
-                break
+            print ("\n Cierre el programa y reconecte arduino ")
+            while True:
+                pass
     return None   # notificamos un problema 
-
-# mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
-# FUNCIONES FECHA / HORA
-# mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
-     
-def epochDate(epoch):
-    '''
-    Funcion para convertir un tiempo epoch en fecha/hora 'humana'
-    Usado para imprimir los tiempos que forman parte de los detalles de los telegramas y mensajes de consola
-    '''
-    fechaHora = time.strftime("%Y-%m-%d , %H:%M:%S", time.localtime(epoch))
-    return fechaHora
 
 
 # mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
@@ -282,16 +222,6 @@ def update_info():
 #  FIN DEL BLOQUE DE DEFINICION DE FUNCIONES
 #----------------------------------------------------------------------------------------------------
 
-
-
-#Ruta absoluta en la que se encuentra el script. Util apra las llamadas desde el inicio del sistema
-RUTA_PROGRAMA = os.path.dirname(os.path.abspath(__file__)) +'/'
-NOMBRE_SCRIPT_EN_EJECUCION = os.path.basename(__file__)
-
-print ("==================================================")
-print ("\nRuta ABSOUTA DEL PROGRAMA:\n", RUTA_PROGRAMA)
-print ("\nNombre del fichero en ejecucion:\n", NOMBRE_SCRIPT_EN_EJECUCION)
-print ("\n==================================================\n\n")
 
 VELOCIDAD_PUERTO_SERIE = 9600
 
