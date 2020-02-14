@@ -128,7 +128,7 @@ def consultar_Arduino(PAUSA = 0.5):
             linea_leida_de_Arduino = arduinoSerialPort.readline().strip()
             linea_leida_de_Arduino = linea_leida_de_Arduino.decode("utf-8")
             listaObtenidaDelinea = []
-            print(linea_leida_de_Arduino,"inside")
+            #print(linea_leida_de_Arduino,"inside") ##DEBUG
             try:
                 listaObtenidaDelinea = linea_leida_de_Arduino.split(" ")
                 #print(listaObtenidaDelinea, len(listaObtenidaDelinea),"list")
