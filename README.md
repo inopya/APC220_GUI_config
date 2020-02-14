@@ -4,6 +4,10 @@
 Sencillo programa en Python/TKinter para facilitar la configuracion de los modulos de comunicaciones APC220 de DFrobot
 Como todo en esta vida... surge de la necesidad.
 
+Grabar Arduino UNO (la opcion mas comoda) o cualquier otro arduino, con el 'firmware' que hay en al carpera ARDUINO_firmware.
+Ejecuar en el PC el programa python y a "divertirse"
+
+
 Breve recordatorio de los parametros de confiuracion del módulo:
 Cuando se lee la configuracion del modulo se obtiene un linea similar a esta:
 
