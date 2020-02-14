@@ -43,7 +43,7 @@ import numpy as np
 import math
 
 
-#ENTORNO GRAFICO TKinter (para generar los cuadros de dialogo)   Â¡Â¡ SIN USO !!
+#ENTORNO GRAFICO TKinter 
 try:  
     from tkinter import *
     import tkinter.filedialog as tkFileDialog #dialogBox
@@ -55,7 +55,7 @@ except ImportError:
     PyVersion = 2
 
 
-#GESTION DE IMAGENES PARA TK
+#GESTION DE IMAGENES PARA TK (Sin Uso)
 from PIL import Image
 from PIL import ImageTk
 
