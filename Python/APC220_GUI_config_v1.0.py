@@ -208,7 +208,6 @@ def enviar_a_Arduino(orden):
                 print (epochDate(time.time()))
                 print ("_______________________________________________\n\n")
                 break
-    print ("datos enviados")
     return None   # notificamos un problema 
 
 # mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
