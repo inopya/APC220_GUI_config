@@ -26,7 +26,6 @@
 # TIEMPOS, FECHAS
 import time             #manejo de funciones de tiempo (fechas, horas, pausas...)
 from time import sleep  #pausas...
-##import datetime
 
 #PUERTO SERIE
 import serial
@@ -92,7 +91,7 @@ def consultar_Arduino(PAUSA = 0.5):
     version mejorada para evitar errores de comunicacion
     ante eventuales fallos de la conexion.
     '''
-    global arduinoSerialPort, FLAG_buscandoConexion
+    global arduinoSerialPort
 
     try:
         arduinoSerialPort.flushInput() #eliminar posibles restos de lecturas anteriores
@@ -118,11 +117,10 @@ def consultar_Arduino(PAUSA = 0.5):
     except:
         #si llegamos aqui es que se ha perdido la conexion con Arduino  :(
         print ("\n_______________________________________________")
-        if FLAG_buscandoConexion == False:      #primera vez que llegamos aqui
-            print ("\n == CONEXION PERDIDA == ")
-            print ("\n Cierre el programa y reconecte arduino ")
-            while True:
-                pass
+        print ("\n == CONEXION PERDIDA == ")
+        print ("\n Cierre el programa y reconecte arduino ")
+        while True:
+            pass
 
     return None 
 
@@ -131,7 +129,7 @@ def consultar_Arduino(PAUSA = 0.5):
 
 def enviar_a_Arduino(orden):
     ''' funcion para enviar ordenes a ARDUINO '''
-    global arduinoSerialPort, FLAG_buscandoConexion
+    global arduinoSerialPort
 
     try:
         arduinoSerialPort.flushInput() #eliminar posibles restos de lecturas anteriores
@@ -155,16 +153,15 @@ def enviar_a_Arduino(orden):
     except:
         #si llegamos aqui es que se ha perdido la conexion con Arduino  :(
         print ("\n_______________________________________________")
-        if FLAG_buscandoConexion == False:      #primera vez que llegamos aqui
-            print ("\n == CONEXION PERDIDA == ")
-            print ("\n Cierre el programa y reconecte arduino ")
-            while True:
-                pass
+        print ("\n == CONEXION PERDIDA == ")
+        print ("\n Cierre el programa y reconecte arduino ")
+        while True:
+            pass
     return None   # notificamos un problema 
 
 
 # mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
-# FUNCIONES EVENTO TKinter
+# FUNCIONES EVENTOS TKinter
 # mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
 
 
@@ -193,6 +190,7 @@ def select_flag(flag):
 def mouse_click(event):
     update_info()
     return
+
 
 def update_info():
     a = w0.get()
@@ -227,15 +225,6 @@ VELOCIDAD_PUERTO_SERIE = 9600
 
 SerialDelay = 0.5                   #tiempo entre llamadas del puerto (en segundos), para que pueda reaccionar.
                                     #No usar tiempos inferiores a 0.25 segundos 
-
-FLAG_reinicio_Arduino = True        #control de si es la primera vez que estamos intentando acceder a arduino
-                                    #para evitar errores por variables que aun no se hayan podido cargar
-
-FLAG_buscandoConexion = True        #bandera apra el control de reconexiones
-                                    #en caso de que se pierda la comunicacion con arduino
-
-
-
 
 #====================================================================================================
 # PUERTO SERIE PARA COMUNICACION CON ARDUINO
