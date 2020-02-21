@@ -32,12 +32,15 @@ import serial
 
 
 #ENTORNO GRAFICO TKinter
-try:  
+try:
     from tkinter import *
 
-except ImportError:  
+except ImportError:
     from Tkinter import *
 
+
+
+FLAG_radioButton = True  #selecciona entre radioboton o bonton normal en los menus de parametros
 
 
 
@@ -173,7 +176,8 @@ def select_flag(flag):
         enviar_a_Arduino(comando)
         print("\n >> CONFIGURACION ACTUALIZADA\n\n")
         mensaje = "WRITE:  "+ comando
-        config_label.configure(text=mensaje)
+        config_label.configure(fg="red", text=mensaje)
+        
         
     if flag==1:
         print("\nRECIBIDA ORDEN LEER ")
@@ -183,7 +187,7 @@ def select_flag(flag):
         if (respuesta != None):
             print(respuesta)
             mensaje = "READ:  "+ respuesta
-            config_label.configure(text=mensaje)     
+            config_label.configure(fg="green", text=mensaje)     
     
 
 def mouse_click(event):
@@ -193,23 +197,25 @@ def mouse_click(event):
 
 def update_info():
     a = w0.get()
-    b = w1.get()
-    ajuste =""
-    if b <10:
-        ajuste ="0"
-    if b==100:
-        b=0
-        ajuste ="0"
-        a=a+1
-    if a>455:
-        a=455
     if a<418:
         a=418
+    if a>=455:
+        a=455
+        w1.set(0)
+        w2.set(0)
+    b1 = int(w1.get()/100)
+    b2= w2.get()
+    ajuste =""
+    if b2 <10:
+        ajuste ="0"
     c = bitrateRF.get()
     d = potenciaRF.get()
     e = bitrateSerial.get()
-    f = paridad.get() 
-    comando = "WR "+str(a)+ajuste+str(b)+"0 "+str(c)+" "+str(d)+" "+str(e)+" "+str(f)
+    f = paridad.get()
+    RadioFrecuencia  = str(a)+str(b1)+ajuste+str(b2)
+    if(int(RadioFrecuencia))>455000:
+       RadioFrecuencia = "455000"
+    comando = "WR "+RadioFrecuencia+" "+str(c)+" "+str(d)+" "+str(e)+" "+str(f)
     MHz_label.configure(text=comando)
     root.after(100, update_info)
     return comando
@@ -303,6 +309,7 @@ if puertoDetectado:
     # initialize the window toolkit along with the two image panels
     root = Tk()
     root.title("CONFIGURADOR modulos APC220 Linux/Windows - Inopya")
+    root.resizable(False, False)
 
     screen_nombres = Frame(root)
     screen_medio = Frame(root)
@@ -335,49 +342,63 @@ if puertoDetectado:
     # *** BITRATE RF *** 
     bitrateRF = IntVar()
     for text, value in [(' 2400 bps  ', 1), (' 4800 bps  ', 2), (' 9600 bps  ', 3), ('19200 bps  ', 4)]:
-        Radiobutton(panel_bitrateRF, text=text, value=value, variable=bitrateRF).pack(anchor=W)
-        #Radiobutton(root, text=text, value=value, variable=bitrateRF, indicatoron=0).pack(anchor=W, fill=X, ipadx=18)
+        if(FLAG_radioButton==True):
+            Radiobutton(panel_bitrateRF, text=text, value=value, variable=bitrateRF).pack(anchor=W)
+        else:
+            Radiobutton(panel_bitrateRF, text=text, value=value, variable=bitrateRF, indicatoron=0).pack(anchor=W, fill=X, ipadx=18)
     bitrateRF.set(3)
 
 
     # *** POTENCIA DE EMISION ***
     potenciaRF = IntVar()
     for text, value in [('0      ',0),('1      ',1),('2      ',2),('3      ',3),('4      ',4),('5      ',5),('6      ',6),('7      ',7),('8      ',8),('9      ',9),]:
-        Radiobutton(panel_potenciaRF, text=text, value=value, variable=potenciaRF).pack(anchor=CENTER)
-        #Radiobutton(root, text=text, value=value, variable=potenciaRF, indicatoron=0).pack(anchor=W, fill=X, ipadx=18)
+        if(FLAG_radioButton==True):
+            Radiobutton(panel_potenciaRF, text=text, value=value, variable=potenciaRF).pack(anchor=CENTER)
+        else:
+            Radiobutton(panel_potenciaRF, text=text, value=value, variable=potenciaRF, indicatoron=0).pack(anchor=W, fill=X, ipadx=18)
     potenciaRF.set(9)
     
     
     # *** BITRATE SERIAL - ARDUINO ***
     bitrateSerial = IntVar()
     for text, value in [('  1200 bps  ', 0),('  2400 bps  ', 1),('  4800 bps  ', 2),('  9600 bps  ', 3),('19200 bps  ', 4),('38400 bps  ', 5),('57600 bps  ', 6),]:
-        Radiobutton(panel_bitrateSerial, text=text, value=value, variable=bitrateSerial).pack(anchor=E)
-        #Radiobutton(root, text=text, value=value, variable=bitrateSerial, indicatoron=0).pack(anchor=W, fill=X, ipadx=18)
+        if(FLAG_radioButton==True):
+            Radiobutton(panel_bitrateSerial, text=text, value=value, variable=bitrateSerial).pack(anchor=E)
+        else:
+            Radiobutton(panel_bitrateSerial, text=text, value=value, variable=bitrateSerial, indicatoron=0).pack(anchor=W, fill=X, ipadx=18)
     bitrateSerial.set(3)
 
 
     # *** PARIDAD ***
     paridad = IntVar()
     for text, value in [('Sin Paridad', 0), ('Paridad PAR', 1),('Paridad IMPAR', 2),]:
-        Radiobutton(panel_paridad, text=text, value=value, variable=paridad).pack(anchor=W)
-        #Radiobutton(root, text=text, value=value, variable=paridad, indicatoron=0).pack(anchor=W, fill=X, ipadx=18)
+        if(FLAG_radioButton==True):
+            Radiobutton(panel_paridad, text=text, value=value, variable=paridad).pack(anchor=W)
+        else:
+            Radiobutton(panel_paridad, text=text, value=value, variable=paridad, indicatoron=0).pack(anchor=W, fill=X, ipadx=18)
     paridad.set(0)
 
     
     # *** FRECUENCIA DE LA EMISION RF ***
-    w0 = Scale(panel_MHz, from_=418, to=454, resolution=1, length=450, orient=HORIZONTAL)
+    w0 = Scale(panel_MHz, from_=418, to=455, resolution=1, length=350, orient=HORIZONTAL)
     w0.bind("<ButtonRelease-1>", mouse_click)#
     w0.pack(side="top", padx=10, pady=2)
     w0.set(0)
     
-    w1 = Scale(panel_MHz, from_=0, to=100, resolution=1, length=450, orient=HORIZONTAL)
+    w2 = Scale(panel_MHz, from_=0, to=99, resolution=1, length=350, orient=HORIZONTAL)
+    w2.bind("<ButtonRelease-1>", mouse_click)#
+    w2.pack(side="bottom", padx=10, pady=2)
+    w2.set(0)
+    
+    w1 = Scale(panel_MHz, from_=0, to=900, resolution=100, length=350, orient=HORIZONTAL)
     w1.bind("<ButtonRelease-1>", mouse_click)#
     w1.pack(side="bottom", padx=10, pady=2)
     w1.set(0)
     
+  
 
 
-    MHz_label = Label(screen_info, text="")
+    MHz_label = Label(screen_info, bg="white", fg="blue", text="")
     MHz_label.pack()
 
     config_label = Label(screen_lectura, text="", fg="Red", font=("Helvetica", 18))
