@@ -73,10 +73,13 @@ Debe hacerse cambiando dicha variable que se encuentra al principio del codigo P
 
 ***
 ```diff
-+Inicio del prorgama con error, detectado Arduino pero APC220 no detectado
++Inicio del programa con error, detectado Arduino pero APC220 no detectado
 ```
 
 ![](./imagenes/run_fail.png)
+
+*Sugerencia, si no hemos olvidado conectar el modulo, esperar unos segundos y pulsar sobre el boton "leer configuración"
+para que el programa vuelva a detectar el módulo.*
 
 ***
 ```diff
@@ -92,6 +95,9 @@ Debe hacerse cambiando dicha variable que se encuentra al principio del codigo P
 
 ![](./imagenes/read_fail.png)
 
+*Sugerencia, si no hemos olvidado conectar el modulo, esperar unos segundos y pulsar sobre el boton "leer configuración"
+para que el programa vuelva a detectar el módulo.*
+
 ***
 ```diff
 +Escritura de nuevos parametros en el APC220 realizada correctamente
@@ -105,3 +111,6 @@ Debe hacerse cambiando dicha variable que se encuentra al principio del codigo P
 ```
 
 ![](./imagenes/write_error.png)
+
+*Sugerencia, si no hemos olvidado conectar el modulo, esperar unos segundos y pulsar sobre el boton "leer configuración"
+para que el programa vuelva a detectar el módulo.*
