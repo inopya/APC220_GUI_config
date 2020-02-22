@@ -40,15 +40,15 @@ Para grabar nuevos parametros en el modulo, selecionar desde la interfaz grafica
 
 Comprobar que dicha configuracion ha quedado establecida mediant el boton "leer configuracion"
  
-#### Muestra de la interfaz grafica de configuracion
+***Muestra de la interfaz grafica de configuracion***
 ![](./imagenes/configuradorAPC220_inopya.png)
 
 
-#### Partes de la interfaz grafica
+***Partes de la interfaz grafica***
 ![](./imagenes/help.png)
 
 
-#### Interfaz grafica con la opcion radioButton desactivada
+***Interfaz grafica con la opcion radioButton desactivada***
 
 Ejemplo de la intecfaz si se selecciona FLAG_radioButton = True
 Debe hacerse cambiando dicha variable que se encuentra al principio del codigo Python
