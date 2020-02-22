@@ -1,31 +1,31 @@
 # APC220 GUI config
-***Configurador para APC220 con interfaz grafica TKinter compatible Linux/Windows***
+***Configurador para APC220 con interfaz gráfica TKinter compatible Linux/Windows***
 
-Sencillo programa en Python/TKinter para facilitar la configuracion de los modulos de comunicaciones APC220 de DFrobot
+Sencillo programa en Python/TKinter para facilitar la configuración de los módulos de comunicaciones APC220 de DFrobot
 Como todo en esta vida... surge de la necesidad.
 
-Grabar Arduino UNO (la opcion más comoda) o cualquier otro arduino, con el 'firmware' que hay en al carpera ARDUINO_firmware.
-La conexion entre arduino y el módulo APC220 esta descrita en los comentarios del programa *.ino*
+Grabar Arduino UNO (la opción más comoda debido a que podemos 'pinchar' el APC220 directamente sobre los pines 8a 13) o cualquier otro Arduino, con el 'firmware' que hay en al carpera ARDUINO_firmware.
+La conexión entre arduino y el módulo APC220 esta descrita en los comentarios del programa *.ino*
 Ejecuar en el PC el programa python y a "divertirse"
 
 
-Breve recordatorio de los parametros de confiuracion del módulo:
-Cuando se lee la configuracion del modulo se obtiene un linea similar a esta:
+Breve recordatorio de los parametros de configuración del módulo:
+Cuando se lee la configuración del módulo se obtiene un linea similar a esta:
 
-####   ***PARAM  AAAAAA B C D E***
-####   PARAM  415370 2 9 3 0 
+####   ***PARA  AAAAAA B C D E***
+####   PARA  415370 2 9 3 0 
 	AAAAAA, es la frecuencia de trabajo del modulo expresada en KHz 
 	Puede oscilar entre 418MHz y 455MHz
-	- en el ejemplo 415.37MHz 
+	- en el ejemplo 415370KHz 
 
-	B, es la velocidad de transmision de radio frecuencia puede tomar los siguientes valores
+	B, es la velocidad de transmisión de radio frecuencia puede tomar los siguientes valores
 	1 (2400bps), 2 (4800bps), 3 (9600bps), 4 (19200bps)
 	- en el ejemplo 4800bps 
 	
-	C, es la potencia de emision, puede tomar valores entre 0 y 9, siendo 9 la mayor potencia
-	- en el ejemplo 9 (maxima potencia de emision)
+	C, es la potencia de emisión, puede tomar valores entre 0 y 9, siendo 9 la mayor potencia
+	- en el ejemplo 9 (máxima potencia de emisión 20mW)
 	
-	D, velodidad de transferencia entre el modulo y arduino o PC 	, toma valores entre 0 y 6
+	D, velodidad de transferencia entre el módulo y Arduino o PC 	, toma valores entre 0 y 6
 	0 (1200bps), 1 (2400bps), 2 (4800bps),3 (9600bps), 4 (19200bps), 5 (38400bps), 6 (57600bps)
 	- en el ejemplo 9600bps 
 	
@@ -33,16 +33,16 @@ Cuando se lee la configuracion del modulo se obtiene un linea similar a esta:
 	0 (sin control de paridad), 1 (paridad par), 2 (paridad impar)
 	- en el ejemplo sin control de paridad
 	
-para mas detalles consultar el [_datasheet_](./APC220_Datasheet.pdf) que hay en este repositorio o directamente en la pagina del fabricante
+Para más detalles consultar el [_datasheet_](./APC220_Datasheet.pdf) que hay en este repositorio o directamente en la página del fabricante.
 https://wiki.dfrobot.com/APC220_Radio_Data_Module_SKU_TEL0005_
 
 
-Para grabar nuevos parametros en el modulo, selecionar desde la interfaz grafica y pulsar el boton "grabar configuracion"
+Para grabar nuevos parametros en el módulo, selecionar desde la interfaz gráfica y pulsar el botón "Grabar configuración"
 
-Comprobar que dicha configuracion ha quedado establecida mediant el boton "leer configuracion"
+Comprobar que dicha configuración ha quedado establecida mediante el botón "Leer configuracion"
 
 ***
-***Muestra de la interfaz grafica de configuración y consola python***
+***Eemplo de la interfaz gráfica del programa junto con la consola python***
 
 ![](./imagenes/configuradorAPC220_inopya.png)
 
@@ -55,8 +55,8 @@ Comprobar que dicha configuracion ha quedado establecida mediant el boton "leer 
 ***
 ***Interfaz grafica con la opcion radioButton desactivada***
 
-Ejemplo de la intecfaz si se selecciona FLAG_radioButton = True
-Debe hacerse cambiando dicha variable que se encuentra al principio del codigo Python
+Ejemplo de la intecfaz si se selecciona *FLAG_radioButton = True*
+Esto debe hacerse cambiando dicha variable que se encuentra al principio del código Python
 
 ![](./imagenes/button_mode.png)
 
@@ -78,7 +78,7 @@ Debe hacerse cambiando dicha variable que se encuentra al principio del codigo P
 
 ![](./imagenes/run_fail.png)
 
-*Sugerencia, si no hemos olvidado conectar el modulo, esperar unos segundos y pulsar sobre el boton "leer configuración"
+*Sugerencia, si no hemos olvidado conectar el módulo, esperar unos segundos y pulsar sobre el boton "Leer configuración"
 para que el programa vuelva a detectar el módulo.*
 
 ***
@@ -95,7 +95,7 @@ para que el programa vuelva a detectar el módulo.*
 
 ![](./imagenes/read_fail.png)
 
-*Sugerencia, si no hemos olvidado conectar el modulo, esperar unos segundos y pulsar sobre el boton "leer configuración"
+*Sugerencia, si no hemos olvidado conectar el módulo, esperar unos segundos y pulsar sobre el boton "Leer configuración"
 para que el programa vuelva a detectar el módulo.*
 
 ***
@@ -112,5 +112,5 @@ para que el programa vuelva a detectar el módulo.*
 
 ![](./imagenes/write_error.png)
 
-*Sugerencia, si no hemos olvidado conectar el modulo, esperar unos segundos y pulsar sobre el boton "leer configuración"
+*Sugerencia, si no hemos olvidado conectar el módulo, esperar unos segundos y pulsar sobre el boton "Leer configuración"
 para que el programa vuelva a detectar el módulo.*
