@@ -55,7 +55,7 @@ Debe hacerse cambiando dicha variable que se encuentra al principio del codigo P
 
 ![](./imagenes/button_mode.png)
 
-#### Ejemplos de mensajes durante el uso de programa
+#  Ejemplos de mensajes durante el uso de programa
 Las siguientes capturas muestran los posibles mensajes y situaciones que nos podemos encontrar durante el uso del programa:
 
 
@@ -81,9 +81,9 @@ Las siguientes capturas muestran los posibles mensajes y situaciones que nos pod
 
 ***Escritura de nuevos parametros en el APC220 realizada correctamente***
 
-	![](./imagenes/write_ok.png)
+![](./imagenes/write_ok.png)
 
 
 ***Error al escribir nuevos parametros en el APC220***
 
-	![](./imagenes/write_error.png)
+![](./imagenes/write_error.png)
