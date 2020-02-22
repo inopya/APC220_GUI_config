@@ -44,6 +44,26 @@ FLAG_radioButton = True  #selecciona entre radioboton o bonton normal en los men
 
 
 
+class StatusBar(Frame):
+
+    def __init__(self, master):
+        Frame.__init__(self, master)
+        self.label = Label(self, bd=1, relief=SUNKEN, anchor=W)#anchor=E
+        self.label.pack(fill=X)
+
+    def text_color(self, format, *args):
+       self.label.config(fg=format % args)
+       self.label.update_idletasks()
+        
+    def set(self, format, *args):
+        self.label.config(text=format % args)
+        self.label.update_idletasks()
+
+    def clear(self):
+        self.label.config(text="")
+        self.label.update_idletasks()
+        
+
 # mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
 # FUNCIONES ARDUINO / SERIAL
 # mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
@@ -94,7 +114,7 @@ def consultar_Arduino(PAUSA = 0.5):
     version mejorada para evitar errores de comunicacion
     ante eventuales fallos de la conexion.
     '''
-    global arduinoSerialPort
+    global arduinoSerialPort, FLAG_APC_presente
 
     try:
         arduinoSerialPort.flushInput() #eliminar posibles restos de lecturas anteriores
@@ -111,18 +131,16 @@ def consultar_Arduino(PAUSA = 0.5):
             linea_leida_de_Arduino = arduinoSerialPort.readline().strip()
             linea_leida_de_Arduino = linea_leida_de_Arduino.decode("utf-8")
             try:
-                listaObtenidaDelinea = linea_leida_de_Arduino.split(" ")
-                if (len(listaObtenidaDelinea) == 6):
-                    return  linea_leida_de_Arduino
-                return None
+                return  linea_leida_de_Arduino
             except:
                 return None
     except:
-        #si llegamos aqui es que se ha perdido la conexion con Arduino  :(
+        #si llegamos aqui es que se ha perdido la conexion con el APC o peor aun... con Arduino  :(
         print ("\n_______________________________________________")
-        print ("\n == CONEXION PERDIDA == ")
-        print ("\n Cierre el programa, reconecte arduino y ejecute de nuevo \n\n\n\n")
-        root.destroy()
+        print ("\n == APC NO DETECTADO o FALLO CONEXION DE ARDUINO == ")
+        print ("\n Espere unos segundos e intentelo de nuevo")
+        print (" Si el fallo persite cierre el programa,\n reconecte arduino y ejecute de nuevo \n\n\n\n")
+        FLAG_APC_presente = False
 
     return None 
 
@@ -155,7 +173,7 @@ def enviar_a_Arduino(orden):
     except:
         #si llegamos aqui es que se ha perdido la conexion con Arduino  :(
         print ("\n_______________________________________________")
-        print ("\n == CONEXION PERDIDA == ")
+        print ("\n == CONEXION CON ARDUINO PERDIDA == ")
         print ("\n Cierre el programa, reconecte arduino y ejecute de nuevo \n\n\n\n")
         root.destroy()
 
@@ -167,15 +185,29 @@ def enviar_a_Arduino(orden):
 # mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
 
 
-def select_flag(flag): 
+def select_flag(flag):
+    global FLAG_APC_presente
+    
     if flag==0:
+        mensaje = ""
         print("\nRECIBIDA ORDEN GRABAR")
         comando = update_info()
         print(comando)
         print("\nARDUINO esta procesando...\n\n")
         enviar_a_Arduino(comando)
-        print("\n >> CONFIGURACION ACTUALIZADA\n\n")
-        mensaje = "WRITE:  "+ comando
+        sleep(2)
+        enviar_a_Arduino("RD")  ##nuevo
+        respuesta = consultar_Arduino(2) ##nuevo
+        listaRespuesta = respuesta.split(" ")##nuevo
+        if (len(listaRespuesta) == 6):##nuevo
+            #respuesta de parametros ok
+            if (listaRespuesta[0] == "PARA"):
+                mensaje = "WRITE:  "+ respuesta + "  ,ok"
+                print("\n >> CONFIGURACION ACTUALIZADA\n\n")
+        else:
+            mensaje = "WRITE ERROR"
+            print("\n >> FALLO ACTUALIANDO CONFIGURACION\n\n")
+            FLAG_APC_presente  = False
         config_label.configure(fg="red", text=mensaje)
         
         
@@ -184,11 +216,25 @@ def select_flag(flag):
         print("\nARDUINO esta procesando...\n\n")
         enviar_a_Arduino("RD")
         respuesta = consultar_Arduino(2)
+
+        if (respuesta == "APC_FAIL"):
+            print("MODULO NO DETECTADO, REVISE LAS CONEXIONES")
+            mensaje = "MODULO NO DETECTADO"
+            config_label.configure(fg="red", text=mensaje)
+            FLAG_APC_presente  = False
+            return
+
         if (respuesta != None):
             print(respuesta)
-            mensaje = "READ:  "+ respuesta
-            config_label.configure(fg="green", text=mensaje)     
-    
+            listaRespuesta = respuesta.split(" ")
+            if (len(listaRespuesta) == 6 and listaRespuesta[0] == "PARA"):
+                FLAG_APC_presente  = True
+                mensaje = "READ:  "+ respuesta
+                config_label.configure(fg="green", text=mensaje)
+            return
+
+        if (respuesta == None):
+            pass#FLAG_APC_presente  = False    
 
 def mouse_click(event):
     update_info()
@@ -196,6 +242,7 @@ def mouse_click(event):
 
 
 def update_info():
+    info_status_bar = ""
     a = w0.get()
     if a<418:
         a=418
@@ -217,7 +264,18 @@ def update_info():
        RadioFrecuencia = "455000"
     comando = "WR "+RadioFrecuencia+" "+str(c)+" "+str(d)+" "+str(e)+" "+str(f)
     MHz_label.configure(text=comando)
+
+    if(FLAG_APC_presente  == True):
+        info_status_bar = info_puerto_conexion + "  --> Modulo APC220, ok"
+        statusbar.text_color("blue")
+        
+    if(FLAG_APC_presente  == False):
+        info_status_bar = info_puerto_conexion + "  --> Modulo APC220 no detectado"
+        statusbar.text_color("red")
+    statusbar.set(info_status_bar)
+    
     root.after(100, update_info)
+    
     return comando
 
 
@@ -242,12 +300,32 @@ encargandose de gestionar la reconexion de arduino incluso aunque esta se haga e
 del que se conecto inicialmente
 '''
 
+FLAG_reinicio = True
+FLAG_APC_presente  = False
+mensajeAPCpresente = ""
+
+
 puertoDetectado = detectarPuertoArduino() #detactamos automaticamente el puerto
+
+sleep(2)
 
 if (puertoDetectado != ''):
     arduinoSerialPort = serial.Serial(puertoDetectado, VELOCIDAD_PUERTO_SERIE) #usamos el puerto detectado
     print ("\n ** PLC Conectado en " + puertoDetectado + " ** \n")
+    
+    print("\n >> Comprobando conexion APC220\n")
 
+    #sleep(8)
+    n=0
+    while (n<5 and FLAG_APC_presente == False):  # a veces tarda un poco en contestarnos la primera vez
+        n+=1
+        enviar_a_Arduino("ID")
+        mensajeAPCpresente = consultar_Arduino(2)
+        if (mensajeAPCpresente == "APC_OK"):   # "APC_FAIL"  respuesta si no lo encuentra
+            FLAG_APC_presente = True
+    print("FLAG_APC_presente: ", FLAG_APC_presente," --> ", mensajeAPCpresente)
+    print("\n\n")   
+   
 else:
     print (" == GRABADOR APC220 NO PRESENTE == ")
     print ("    conecte un PLC compatible antes de 120 segundos\n")
@@ -306,11 +384,17 @@ if puertoDetectado:
     print ("\n\n")
 
 
+    info_puerto_conexion = "ARDUINO Programador APC220 en puerto: " + puertoDetectado
+
     # initialize the window toolkit along with the two image panels
     root = Tk()
     root.title("CONFIGURADOR modulos APC220 Linux/Windows - Inopya")
     root.resizable(False, False)
 
+    statusbar = StatusBar(root)
+    statusbar.pack(side=BOTTOM, fill=X)
+    statusbar.set(info_puerto_conexion)
+    
     screen_nombres = Frame(root)
     screen_medio = Frame(root)
     
@@ -396,17 +480,21 @@ if puertoDetectado:
     w1.set(0)
     
   
-
-
     MHz_label = Label(screen_info, bg="white", fg="blue", text="")
     MHz_label.pack()
 
-    config_label = Label(screen_lectura, text="", fg="Red", font=("Helvetica", 18))
+    config_label = Label(screen_lectura, text="", fg="Red", font=("Helvetica", 16))
     config_label.pack()
     
     update_info()
- 
     
+    if(FLAG_reinicio == True):
+        FLAG_reinicio = False
+        if(FLAG_APC_presente  == False):
+            config_label.configure(fg="red", text="APC220, fail")
+        else:
+            config_label.configure(fg="blue", text="APC220, ok")
+            
     boton_grabar = Button(screen_botones, text="Grabar configuracion", command= lambda:select_flag(0))
     boton_grabar.pack(side="left", padx="10", pady="10")
 
@@ -425,7 +513,5 @@ if puertoDetectado:
     screen_info.pack(fill=X)
     screen_botones.pack()
     screen_lectura.pack()
-    
+
     root.mainloop()
-
-
