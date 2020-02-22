@@ -66,7 +66,7 @@ Debe hacerse cambiando dicha variable que se encuentra al principio del codigo P
 
 ***
 ```diff
-+Inicio del prorgama ok, detectado Arduino como programador y APC220 conectado a Arduino
++Inicio del programa ok, detectado Arduino como programador y APC220 conectado a Arduino
 ```
 
 ![](./imagenes/run_ok.png)
