@@ -88,13 +88,13 @@
 //------------------------------------------------------
 #define SET      8
 #define AUX      9
+#define TDX     10
+#define RDX     11
 #define EN      12 
 #define VCC     13
 
-#define ARDUINO_RXD     10
-#define ARDUINO_TXD     11
 
-SoftwareSerial APCport(ARDUINO_RXD, ARDUINO_TXD);  //definimos el puerto serie Software para comunicar con el modulo RF
+SoftwareSerial APCport(TDX, RDX);  //definimos el puerto serie Software para comunicar con el modulo RF
 
 
 boolean FLAG_estado_led = false;
@@ -109,7 +109,7 @@ boolean FLAG_estado_led = false;
 void setup() 
 {
   Serial.begin(9600);
-  Serial.println(F(__VERSION__));
+  //Serial.println(F(__VERSION__));
   
   APCport.begin(9600);  //iniciar el puerto serie software para comunicar con el APC220
   
@@ -121,11 +121,11 @@ void setup()
   digitalWrite(SET,HIGH);
   digitalWrite(VCC,HIGH);
   digitalWrite(EN,HIGH);
-  
-  delay(1000);
 
-  Serial.println(F("CONFIGURACION ACTUAL:\n"));
-  read_config();
+  //delay(1000);
+  
+  //Serial.println(F("CONFIGURACION ACTUAL:\n"));
+  //read_config();
 
 }
 
@@ -177,6 +177,13 @@ void atenderPuertoSerie()
       return;
     }    
 
+
+    /* comprobar si al modulo esta conectado */
+    if(comando=="ID"){
+      mostrar_ID(); 
+      return;
+    }
+    
     /* Escribir una configuracion en el transceptor */
     if(comando=="WR"){
       
@@ -201,17 +208,49 @@ void atenderPuertoSerie()
 //mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm*/
 
 //========================================================
-// LEER CONFIGURACION ACTUAL DEL APC220
+// INDICAR SI HAY APC CONECTADO
 //========================================================
 
-void read_config() 
+void mostrar_ID()
 {
   digitalWrite(SET, LOW);         // poner en modo configuracion
   delay(50);                      // pausa para estabilizar
   APCport.print("RD");            // peticion de datos
   APCport.write(0x0D);            // fin de linea
   APCport.write(0x0A);            // y retorno de carro. Similar a hacer un 'println', pero con println no funciona :(
-  delay(100);                     // pausa para estabilizar
+  delay(200);                     // pausa para estabilizar
+
+  bool FLAG_APC_presente = false;
+  while (APCport.available()) {
+    FLAG_APC_presente = true;
+    char c = APCport.read();
+  }
+  digitalWrite(SET, HIGH);        // volver al modo normal
+    
+  if(FLAG_APC_presente == true){
+    Serial.print(F("APC_OK"));
+  }
+  else{
+    Serial.print(F("APC_FAIL"));
+  }
+  Serial.write(0x0D);            // fin de linea
+  Serial.write(0x0A);
+
+}
+
+
+//========================================================
+// LEER CONFIGURACION ACTUAL DEL APC220
+//========================================================
+
+void read_config() 
+{
+  digitalWrite(SET, LOW);         // poner en modo configuracion
+  delay(50);                      // pausa para estabilizar 50
+  APCport.print("RD");            // peticion de datos
+  APCport.write(0x0D);            // fin de linea
+  APCport.write(0x0A);            // y retorno de carro. Similar a hacer un 'println', pero con println no funciona :(
+  delay(200);                     // pausa para estabilizar 200
 
   bool FLAG_APC_presente = false;
   while (APCport.available()) {
@@ -220,7 +259,7 @@ void read_config()
   }
   
   if(FLAG_APC_presente == false){
-    Serial.print(F("MODULO NO DETECTADO, REVISE LAS CONEXIONES"));
+    Serial.print(F("APC_FAIL"));
   }
   
   Serial.write(0x0D);            // fin de linea
