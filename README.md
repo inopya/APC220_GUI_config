@@ -43,3 +43,32 @@ Comprobar que dicha configuracion ha quedado establecida mediant el boton "leer 
 #### Muestra de la interfaz grafica de configuracion
 ![](./imagenes/configuradorAPC220_inopya.png)
 
+#### Partes de la interfaz grafica
+![](./imagenes/help.png)
+
+#### Interfaz grafica con la opcion radioButton desactivada
+
+Ejemplo de la intecfaz si se selecciona FLAG_radioButton = True
+Debe hacerse cambiando dicha variable que se encuentra al principio del codigo Python
+![](./imagenes/button_mode.png)
+
+#### Ejemplos de mensajes durante el uso de programa
+Las siguientes capturas muestran los posibles mensajes y situaciones que nos podemos encontrar durante el uso del programa:
+
+Inicio del prorgama ok, detectado Arduino como programador y APC220 conectado a Arduino
+![](./imagenes/run_ok.png)
+
+Inicio del prorgama con error, detectado Arduino pero APC220 no detectado
+![](./imagenes/run_fail.png)
+
+Lectura de parameptros del APC220 ok
+![](./imagenes/read_ok.png)
+
+Error en la lectura de parameptros del APC220
+![](./imagenes/read_fail.png)
+
+Escritura de nuevos parametros en el APC220 realizada correctamente
+![](./imagenes/write_ok.png)
+
+Error al escribir nuevos parametros en el APC220
+![](./imagenes/write_error.png)
