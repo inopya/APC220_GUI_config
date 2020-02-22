@@ -94,7 +94,7 @@ Debe hacerse cambiando dicha variable que se encuentra al principio del codigo P
 
 ![](./imagenes/write_ok.png)
 
-******
+***
 ```diff
 +Error al escribir nuevos parametros en el APC220
 ```
