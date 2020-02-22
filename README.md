@@ -40,7 +40,7 @@ Para grabar nuevos parametros en el modulo, selecionar desde la interfaz grafica
 
 Comprobar que dicha configuracion ha quedado establecida mediant el boton "leer configuracion"
  
-***Muestra de la interfaz grafica de configuracion***
+***Muestra de la interfaz grafica de configuración y consola python***
 ![](./imagenes/configuradorAPC220_inopya.png)
 
 
@@ -63,9 +63,9 @@ Las siguientes capturas muestran los posibles mensajes y situaciones que nos pod
 
 ![](./imagenes/run_ok.png)
 
-
-***Inicio del prorgama con error, detectado Arduino pero APC220 no detectado***
-
+```diff
+- ***Inicio del prorgama con error, detectado Arduino pero APC220 no detectado***
+```
 ![](./imagenes/run_fail.png)
 
 
