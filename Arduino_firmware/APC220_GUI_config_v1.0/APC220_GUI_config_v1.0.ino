@@ -24,7 +24,7 @@
  
  >> Cuando se lee la configuracion del modulo se obtiene un linea similar a esta (PARAM 415370 2 9 3 0 )
 
-"PARAM AAAAAA B C D E"
+"PARA AAAAAA B C D E"
 
 	AAAAAA, es la frecuencia de trabajo del modulo expresada en KHz 
 	Puede oscilar entre 418MHz y 455MHz
