@@ -1,10 +1,11 @@
-# APC220_GUI_config
+# APC220 GUI config
 ***Configurador para APC220 con interfaz grafica TKinter compatible Linux/Windows***
 
 Sencillo programa en Python/TKinter para facilitar la configuracion de los modulos de comunicaciones APC220 de DFrobot
 Como todo en esta vida... surge de la necesidad.
 
-Grabar Arduino UNO (la opcion mas comoda) o cualquier otro arduino, con el 'firmware' que hay en al carpera ARDUINO_firmware.
+Grabar Arduino UNO (la opcion más comoda) o cualquier otro arduino, con el 'firmware' que hay en al carpera ARDUINO_firmware.
+La conexion entre arduino y el módulo APC220 esta descrita en los comentarios del programa *.ino*
 Ejecuar en el PC el programa python y a "divertirse"
 
 
@@ -39,16 +40,19 @@ https://wiki.dfrobot.com/APC220_Radio_Data_Module_SKU_TEL0005_
 Para grabar nuevos parametros en el modulo, selecionar desde la interfaz grafica y pulsar el boton "grabar configuracion"
 
 Comprobar que dicha configuracion ha quedado establecida mediant el boton "leer configuracion"
- 
+
+***
 ***Muestra de la interfaz grafica de configuración y consola python***
 
 ![](./imagenes/configuradorAPC220_inopya.png)
 
 
+***
 ***Partes de la interfaz grafica***
 ![](./imagenes/help.png)
 
 
+***
 ***Interfaz grafica con la opcion radioButton desactivada***
 
 Ejemplo de la intecfaz si se selecciona FLAG_radioButton = True
@@ -56,6 +60,7 @@ Debe hacerse cambiando dicha variable que se encuentra al principio del codigo P
 
 ![](./imagenes/button_mode.png)
 
+***
 #  Ejemplos de mensajes durante el uso de programa
 ***Las siguientes capturas muestran los posibles mensajes y situaciones que nos podemos encontrar durante el uso del programa:***
 
