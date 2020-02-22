@@ -63,9 +63,12 @@ Las siguientes capturas muestran los posibles mensajes y situaciones que nos pod
 
 ![](./imagenes/run_ok.png)
 
+***
 ```diff
-- ***Inicio del prorgama con error, detectado Arduino pero APC220 no detectado***
+- Inicio del prorgama con error, detectado Arduino pero APC220 no detectado
 ```
+***
+
 ![](./imagenes/run_fail.png)
 
 
