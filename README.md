@@ -55,7 +55,7 @@ Comprobar que dicha configuración ha quedado establecida mediante el botón "Le
 ***
 ***Interfaz grafica con la opcion radioButton desactivada***
 
-Ejemplo de la intecfaz si se selecciona *FLAG_radioButton = True*
+Ejemplo de la intecfaz si se selecciona *FLAG_radioButton = False*
 Esto debe hacerse cambiando dicha variable que se encuentra al principio del código Python
 
 ![](./imagenes/button_mode.png)
