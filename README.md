@@ -93,12 +93,14 @@ Debe hacerse cambiando dicha variable que se encuentra al principio del codigo P
 ![](./imagenes/read_fail.png)
 
 ***
+***
 ```diff
 +Escritura de nuevos parametros en el APC220 realizada correctamente
 ```
 
 ![](./imagenes/write_ok.png)
 
+***
 ***
 ```diff
 +Error al escribir nuevos parametros en el APC220
