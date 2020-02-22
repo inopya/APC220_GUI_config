@@ -58,35 +58,35 @@ Debe hacerse cambiando dicha variable que se encuentra al principio del codigo P
 #  Ejemplos de mensajes durante el uso de programa
 Las siguientes capturas muestran los posibles mensajes y situaciones que nos podemos encontrar durante el uso del programa:
 
-
+***
 ***Inicio del prorgama ok, detectado Arduino como programador y APC220 conectado a Arduino***
 
 ![](./imagenes/run_ok.png)
 
 ***
 ```diff
-- Inicio del prorgama con error, detectado Arduino pero APC220 no detectado
++Inicio del prorgama con error, detectado Arduino pero APC220 no detectado
 ```
 ***
 
 ![](./imagenes/run_fail.png)
 
-
-***Lectura de parameptros del APC220 ok***
+***
+***Lectura de parametros del APC220 ok***
 
 ![](./imagenes/read_ok.png)
 
-
-***Error en la lectura de parameptros del APC220***
+***
+***Error en la lectura de parametros del APC220***
 
 ![](./imagenes/read_fail.png)
 
-
+***
 ***Escritura de nuevos parametros en el APC220 realizada correctamente***
 
 ![](./imagenes/write_ok.png)
 
-
+***
 ***Error al escribir nuevos parametros en el APC220***
 
 ![](./imagenes/write_error.png)
