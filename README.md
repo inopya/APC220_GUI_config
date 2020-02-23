@@ -5,7 +5,7 @@ Sencillo programa en Python/TKinter para facilitar la configuración de los mód
 
 Como casi todo en esta vida... surge de la necesidad.
 
-Me dejaron un par de antenas para probarlas y no pude hacer funcionar la utilidad RF-Magic que ofrece DFRobot. Asi que hoja de características en mano hice una primera versión muy tosca para programarlos usando un arduino que enviaba los comandos serie adecuados. Podeis ver dicha versión aqui: https://github.com/inopya/APC220_Transceiver
+Me dejaron un par de estos módulos para probarlos y no pude hacer funcionar la utilidad RF-Magic que ofrece DFRobot. Asi que hoja de características en mano hice una primera versión muy tosca para programarlos usando un Arduino que enviaba los comandos serie adecuados. Podeis ver dicha versión aqui: https://github.com/inopya/APC220_Transceiver
 Me sacó del apuro pero entendí que no era demasiado amigable para que la usasen otros. Asi que he optado por un poco de python y una sencilla interfaz gráfica en tkinter de modo que sea intuitivo y sobre todo compatible con linux.
 
 	Requisitos: Modulos APC220, Arduino Uno (Nano, Micro, Mega...), Python 
