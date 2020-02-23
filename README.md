@@ -5,8 +5,8 @@ Sencillo programa en Python/TKinter para facilitar la configuración de los mód
 
 Como casi todo en esta vida... surge de la necesidad.
 
-Me dejaron un par de estos módulos para probarlos y no pude hacer funcionar la utilidad RF-Magic que ofrece DFRobot. Asi que hoja de características en mano hice una primera versión muy tosca para programarlos usando un Arduino que enviaba los comandos serie adecuados. Podeis ver dicha versión aqui: https://github.com/inopya/APC220_Transceiver
-Me sacó del apuro pero entendí que no era demasiado amigable para que la usasen otros. Asi que he optado por un poco de python y una sencilla interfaz gráfica en tkinter de modo que sea intuitivo y sobre todo compatible con linux.
+Me dejaron un par de estos módulos para probarlos y no pude hacer funcionar la utilidad RF-Magic que ofrece DFRobot. Así que hoja de características en mano hice una primera versión muy tosca para programarlos usando un Arduino que enviaba los comandos serie adecuados. Podeis ver dicha versión aqui: https://github.com/inopya/APC220_Transceiver
+Me sacó del apuro pero entendí que no era demasiado amigable para que la usasen otros. En este caso he optado por un poco de python y una sencilla interfaz gráfica en tkinter de modo que sea intuitivo y sobre todo compatible con linux.
 
 	Requisitos: Modulos APC220, Arduino Uno (Nano, Micro, Mega...), Python 
 	y tener instalada la libreria pyserial: https://pypi.org/project/pyserial/
@@ -17,8 +17,8 @@ La conexión entre Arduino y el módulo APC220 esta descrita en los comentarios 
 Ejecuar en el PC el programa python y a "divertirse".
 
 
-Breve recordatorio de los parametros de configuración del módulo:
-Cuando se lee la configuración del módulo se obtiene un linea similar a esta:
+Breve recordatorio de los parámetros de configuración del módulo:
+Cuando se lee la configuración del módulo se obtiene un linea similar a ésta:
 
 ####   ***PARA  AAAAAA B C D E***
 ####   PARA  415370 2 9 3 0 
@@ -37,7 +37,7 @@ Cuando se lee la configuración del módulo se obtiene un linea similar a esta:
 	0 (1200bps), 1 (2400bps), 2 (4800bps),3 (9600bps), 4 (19200bps), 5 (38400bps), 6 (57600bps)
 	- en el ejemplo 9600bps 
 	
-	E, es el control de paridad de la informacion emitida por RF
+	E, es el control de paridad de la información emitida por RF
 	0 (sin control de paridad), 1 (paridad par), 2 (paridad impar)
 	- en el ejemplo sin control de paridad
 	
@@ -56,7 +56,7 @@ Comprobar que dicha configuración ha quedado establecida mediante el botón ***
 
 
 ***
-***Descripción de la interfaz grafica***
+***Descripción de la interfaz gráfica***
 ![](./imagenes/help.png)
 
 
@@ -68,20 +68,22 @@ Para ello se ha de utilizar la variable *FLAG_radioButton* que se encuentra al p
 
 ![](./imagenes/button_mode.png)
 
+
 ***
-#  Ejemplos de mensajes durante el uso de programa
+#  Ejemplos de mensajes durante el uso de programa:
+
 ***Las siguientes capturas muestran los posibles mensajes y situaciones que nos podemos encontrar durante el uso del programa:***
 
 ***
 ```diff
-+Inicio del programa ok, detectado Arduino como programador y APC220 conectado a Arduino
++Inicio del programa ok, detectado Arduino como programador y APC220 conectado a Arduino.
 ```
 
 ![](./imagenes/run_ok.png)
 
 ***
 ```diff
-+Inicio del programa con error, detectado Arduino pero APC220 no detectado
++Inicio del programa con error, detectado Arduino pero APC220 no detectado.
 ```
 
 ![](./imagenes/run_fail.png)
@@ -91,14 +93,14 @@ para que el programa vuelva a detectar el módulo.*
 
 ***
 ```diff
-+Lectura correcta de parametros del APC220
++Lectura correcta de parámetros del APC220.
 ```
 
 ![](./imagenes/read_ok.png)
 
 ***
 ```diff
-+Error en la lectura de parametros del APC220
++Error en la lectura de parámetros del APC220.
 ```
 
 ![](./imagenes/read_fail.png)
@@ -108,7 +110,7 @@ para que el programa vuelva a detectar el módulo.*
 
 ***
 ```diff
-+Escritura de nuevos parametros en el APC220 realizada correctamente
++Escritura de nuevos parámetros en el APC220 realizada correctamente.
 ```
 
 ![](./imagenes/write_ok.png)
