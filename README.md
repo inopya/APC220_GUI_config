@@ -22,11 +22,11 @@ Cuando se lee la configuración del módulo se obtiene un linea similar a esta:
 
 ####   ***PARA  AAAAAA B C D E***
 ####   PARA  415370 2 9 3 0 
-	AAAAAA, es la frecuencia de trabajo del modulo expresada en KHz 
+	####AAAAAA####, es la frecuencia de trabajo del módulo expresada en KHz 
 	Puede oscilar entre 418MHz y 455MHz
 	- en el ejemplo 415370KHz 
 
-	B, es la velocidad de transmisión de radio frecuencia puede tomar los siguientes valores
+	####B####, es la velocidad de transmisión de radio frecuencia puede tomar los siguientes valores
 	1 (2400bps), 2 (4800bps), 3 (9600bps), 4 (19200bps)
 	- en el ejemplo 4800bps 
 	
