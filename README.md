@@ -1,11 +1,18 @@
 # APC220 GUI config
 ***Configurador para APC220 con interfaz gráfica TKinter compatible Linux/Windows***
 
-Sencillo programa en Python/TKinter para facilitar la configuración de los módulos de comunicaciones APC220 de DFrobot
-Como todo en esta vida... surge de la necesidad.
+Sencillo programa en Python/TKinter para facilitar la configuración de los módulos de comunicaciones APC220 de DFrobot.
 
-Grabar Arduino UNO (la opción más comoda debido a que podemos 'pinchar' el APC220 directamente sobre los pines 8a 13) o cualquier otro Arduino, con el 'firmware' que hay en al carpera ARDUINO_firmware.
-La conexión entre arduino y el módulo APC220 esta descrita en los comentarios del programa *.ino*
+Como casi todo en esta vida... surge de la necesidad.
+
+Me dejaron un par de antenas para probarlas y no pude hacer funcionar la utilidad RF-Magic que ofrece DFRobot. Asi que hoja de características en mano hice una primera versión muy tosca para programarlos usando un arduino que enviaba los comandos serie adecuados. Podeis ver dicha versión aqui: https://github.com/inopya/APC220_Transceiver
+Me sacó del apuro pero entendí que no era demasiado amigable para que la usasen otros. Asi que he optado por un poco de python y una sencilla interfaz gráfica en tkinter de modo que sea intuitivo y sobre todo compatible con linux.
+
+	Requisitos: Modulos APC220, Arduino Uno (Nano, Micro, Mega...), Python 
+	y tener instalada la libreria pyserial: https://pypi.org/project/pyserial/
+
+Grabar Arduino UNO (la opción más comoda debido a que podemos 'pinchar' el APC220 directamente sobre los pines 8 a 13) o cualquier otro Arduino, con el 'firmware' que hay en al carpera ARDUINO_firmware.
+La conexión entre Arduino y el módulo APC220 esta descrita en los comentarios del programa *.ino*
 Ejecuar en el PC el programa python y a "divertirse"
 
 
@@ -42,21 +49,21 @@ Para grabar nuevos parametros en el módulo, selecionar desde la interfaz gráfi
 Comprobar que dicha configuración ha quedado establecida mediante el botón "Leer configuracion"
 
 ***
-***Eemplo de la interfaz gráfica del programa junto con la consola python***
+***Ejemplo de la interfaz gráfica del programa junto con la consola python***
 
 ![](./imagenes/configuradorAPC220_inopya.png)
 
 
 ***
-***Partes de la interfaz grafica***
+***Descripción de la interfaz grafica***
 ![](./imagenes/help.png)
 
 
 ***
 ***Interfaz grafica con la opcion radioButton desactivada***
 
-Ejemplo de la intecfaz si se selecciona *FLAG_radioButton = False*
-Esto debe hacerse cambiando dicha variable que se encuentra al principio del código Python
+Si se desea se pueden motras las opciones de de la intecfaz como botones en lugar de radio botones.
+Para ello se ha de utilizar la variable *FLAG_radioButton* que se encuentra al principio del código Python y asignarle el valor *False*  
 
 ![](./imagenes/button_mode.png)
 
