@@ -13,7 +13,8 @@ Me sacó del apuro pero entendí que no era demasiado amigable para que la usase
 
 Grabar Arduino UNO (la opción más comoda debido a que podemos 'pinchar' el APC220 directamente sobre los pines 8 a 13) o cualquier otro Arduino, con el 'firmware' que hay en al carpera ARDUINO_firmware.
 La conexión entre Arduino y el módulo APC220 esta descrita en los comentarios del programa *.ino*
-Ejecuar en el PC el programa python y a "divertirse"
+
+Ejecuar en el PC el programa python y a "divertirse".
 
 
 Breve recordatorio de los parametros de configuración del módulo:
