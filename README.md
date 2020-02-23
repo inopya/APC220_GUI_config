@@ -22,11 +22,11 @@ Cuando se lee la configuración del módulo se obtiene un linea similar a esta:
 
 ####   ***PARA  AAAAAA B C D E***
 ####   PARA  415370 2 9 3 0 
-	####AAAAAA####, es la frecuencia de trabajo del módulo expresada en KHz 
+	AAAAAA, es la frecuencia de trabajo del módulo expresada en KHz 
 	Puede oscilar entre 418MHz y 455MHz
 	- en el ejemplo 415370KHz 
 
-	####B####, es la velocidad de transmisión de radio frecuencia puede tomar los siguientes valores
+	B, es la velocidad de transmisión de radio frecuencia puede tomar los siguientes valores
 	1 (2400bps), 2 (4800bps), 3 (9600bps), 4 (19200bps)
 	- en el ejemplo 4800bps 
 	
@@ -45,9 +45,9 @@ Para más detalles consultar el [_datasheet_](./APC220_Datasheet.pdf) que hay en
 https://wiki.dfrobot.com/APC220_Radio_Data_Module_SKU_TEL0005_
 
 
-Para grabar nuevos parametros en el módulo, selecionar desde la interfaz gráfica y pulsar el botón "Grabar configuración"
+Para grabar nuevos parametros en el módulo, selecionar desde la interfaz gráfica y pulsar el botón ***"Grabar configuración"***
 
-Comprobar que dicha configuración ha quedado establecida mediante el botón "Leer configuracion"
+Comprobar que dicha configuración ha quedado establecida mediante el botón ***"Leer configuracion"***
 
 ***
 ***Ejemplo de la interfaz gráfica del programa junto con la consola python***
@@ -61,9 +61,9 @@ Comprobar que dicha configuración ha quedado establecida mediante el botón "Le
 
 
 ***
-***Interfaz grafica con la opcion radioButton desactivada***
+***Interfaz gráfica con la opción radioButton desactivada***
 
-Si se desea se pueden motras las opciones de de la intecfaz como botones en lugar de radio botones.
+Si se desea se pueden mostrar las opciones de de la intecfaz como botones en lugar de radio botones.
 Para ello se ha de utilizar la variable *FLAG_radioButton* que se encuentra al principio del código Python y asignarle el valor *False*  
 
 ![](./imagenes/button_mode.png)
