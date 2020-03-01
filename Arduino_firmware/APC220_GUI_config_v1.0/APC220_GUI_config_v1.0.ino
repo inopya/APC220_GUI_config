@@ -16,7 +16,7 @@
   ##########################################################
 */
 
-#define __VERSION__ "\Tk GUI Configuracion del modulo APC220 v1.0\n"
+#define __VERSION__ "Tk GUI Configuracion del modulo APC220 v1.0\n"
 
 /*
   
