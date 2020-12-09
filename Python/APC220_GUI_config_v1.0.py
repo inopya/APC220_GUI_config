@@ -373,7 +373,7 @@ E, es el control de paridad de la informacion emitida por RF
 
 # mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
 # =========================================================================================================
-#   INICIO DE CONTROL DE CAMARA 
+#   ENTORNO GRAFICO 
 # =========================================================================================================
 # mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
 
